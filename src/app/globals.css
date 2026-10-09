@@ -454,3 +454,44 @@ span.contrib-cell.contrib-l4 {
     opacity: 1;
   }
 }
+
+/* Interactive diagrams embedded in ordinary Markdown articles. */
+.prose-article iframe[data-paging] {
+  display: block;
+  width: 100%;
+  border: 1px solid color-mix(in srgb, var(--foreground) 18%, transparent);
+  border-radius: 12px;
+  min-height: 500px;
+  flex-shrink: 0;
+}
+
+/* Paging derivations: keep nested equations readable and their scroll origin visible. */
+.prose-article:has(iframe[data-paging]) .katex-display > .katex {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  text-align: left;
+  padding: 0.2em 0;
+}
+@media (max-width: 640px) {
+  .prose-article:has(iframe[data-paging]) :is(ul, ol) {
+    padding-left: 1em;
+  }
+}
+
+/* Select the equation layout by its available width, including nested lists. */
+.prose-article .responsive-equation {
+  container-type: inline-size;
+  min-width: 0;
+}
+.prose-article .equation-wide { display: none; }
+@container (min-width: 540px) {
+  .prose-article .equation-wide { display: block; }
+  .prose-article .equation-compact { display: none; }
+  .prose-article .equation-wide .katex-display > .katex { text-align: center; }
+}
+@media (min-width: 768px) {
+  .prose-article:has(iframe[data-paging]) .katex-display > .katex {
+    text-align: center;
+  }
+}

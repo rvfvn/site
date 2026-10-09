@@ -1,4 +1,5 @@
 import Link from "next/link";
+import PagingArticleEmbeds from "@/components/paging/article-embeds";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/site-header";
 import {
@@ -11,6 +12,8 @@ import {
 type Params = { slug: string };
 
 export async function generateStaticParams(): Promise<Params[]> {
+  // Resolve development previews on demand, including unpublished drafts.
+  if (process.env.NODE_ENV !== "production") return [];
   const articles = await getAllArticles();
   return articles.map(({ slug }) => ({ slug }));
 }
@@ -69,6 +72,7 @@ export default async function ArticlePage({
             className="prose-article mt-10"
             dangerouslySetInnerHTML={{ __html: article.html }}
           />
+          {article.html.includes('data-paging') && <PagingArticleEmbeds />}
         </article>
       </div>
     </main>

@@ -55,3 +55,7 @@ public/articles/*
 !public/articles/what-happens-below-a-machine-learning-framework/
 public/articles/what-happens-below-a-machine-learning-framework/*
 !public/articles/what-happens-below-a-machine-learning-framework/cover.png
+
+# Published paging article and its image assets
+!content/articles/virtual-memory-and-paging.md
+!public/articles/virtual-memory-and-paging/
